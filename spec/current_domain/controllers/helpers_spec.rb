@@ -9,7 +9,10 @@ describe CurrentDomain::Controllers::Helpers do
 
       let(:controller) { A.new }
 
-      before { allow(controller).to receive_message_chain(:request, :host).and_return('host.name') }
+      before do
+        allow(controller).to receive_message_chain(:request, :host)
+          .and_return('host.name')
+      end
 
       it 'returns request host name' do
         expect(controller.current_domain).to eq('host.name')
@@ -20,14 +23,17 @@ describe CurrentDomain::Controllers::Helpers do
       class B < ActionController::Base
         include CurrentDomain::Controllers::Helpers
 
-        def find_domain(host)
+        def find_domain(_host)
           'domain'
         end
       end
 
       let(:controller) { B.new }
 
-      before { allow(controller).to receive_message_chain(:request, :host).and_return('host.name') }
+      before do
+        allow(controller).to receive_message_chain(:request, :host)
+          .and_return('host.name')
+      end
 
       it 'returns custom domain object' do
         expect(controller.current_domain).to eq(controller.find_domain(''))
