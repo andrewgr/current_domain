@@ -5,7 +5,7 @@
 
 Some Rails apps have to be available on multiple domains, for example, acmeinc.com, acmeinc.ru, acmeinc.com.au. Quite often in this case the app has to know the current domain to adjust the UI or do some customization.
 
-This gem adds `current_user` helper method to all the controllers and views of the app. The method returns the host name on which the web app is currently accessed. It can also be customized to return custom objects for different domains if, for example, the app has Domain or Host model that represent each of the app domains.
+This gem adds `current_domain` helper method to all the controllers and views of the app. The method returns the host name at which the web app is currently accessed. It can also be customized to return custom objects for different domains if, for example, the app has Domain or Host model that represent each of the app domains.
 
 ## Installation
 
@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-Once this gem is included into Gemfile of a Rails app, `current_user` helper method is available in all controllers and views of the applications. If an app has models or other classes that represent each app domain then add similar code to `ApplicationController` to return custom objects instead of host names:
+Once this gem is included into Gemfile of a Rails app, `current_domain` helper method is available in all controllers and views of the applications. If an app has models or other classes that represent each app domain then add similar code to `ApplicationController` to return custom objects instead of host names:
 
     def find_domain(host)
       Domain.find_by_host(host)
